@@ -1,0 +1,26 @@
+<div class="max-w-site mx-auto flex flex-col gap-5 lg:flex-row">
+  {{#foreach posts to="1"}}
+    {{> cards/post-card-vertical-main 
+      card_class="flex-2 pb-6 border-b border-brd-soft lg:pb-0 lg:border-b-0 lg:pr-5 lg:border-r"
+      image_loading="eager"
+    }}
+  {{/foreach}}
+  
+  <div class="flex-1 flex flex-col gap-6 md:grid md:grid-cols-2 md:grid-rows-2 lg:flex lg:flex-col">
+    {{#foreach posts from="2" to="4"}}
+      {{#match @number 2}}
+        {{> cards/post-card-vertical 
+          card_class="border-b border-brd-soft pb-6 md:row-span-2 [&_p]:hidden lg:[&_p]:block"
+          title_class="lg:text-2xl"
+          image_loading="eager"
+          use_h2=true
+        }}
+      {{else}}
+        {{> cards/post-card-horizontal-sm
+          card_class="not-last-of-type:border-b border-brd-soft not-last-of-type:pb-6"
+          image_loading="eager"
+        }}  
+      {{/match}}
+    {{/foreach}}
+  </div>
+</div>

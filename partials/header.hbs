@@ -1,0 +1,86 @@
+<header class="px-5 sm:px-6 bg-bgr text-typ whitespace-nowrap font-sans [&_.is-subitem]:hidden [&_.is-mainitem_.is-subitem]:flex" data-header 
+  x-init="$nextTick(() => { initDropdown($el, 'z-50 min-w-[calc(100%_+_16px)] text-sm absolute top-0 border-t-[2.5px] border-typ flex flex-col gap-0.25 shadow-lg rounded-theme py-1.5 px-2 -ml-2 mt-8.5 opacity-0 invisible bg-bgr') })">
+
+  <div class="max-w-site mx-auto flex flex-col">
+    <div class="flex py-4" data-header-top>
+      {{!-- Socials --}}
+      {{#match @custom.header_logo_position "center"}}
+        {{> social-links 
+          nav_class="hidden md:flex flex-1 gap-2.5 items-center self-center"
+          item_class="hover:text-brand"
+          icon_class="stroke-2 size-4 lg:size-4.5"
+          text_class="sr-only"
+        }}
+      {{/match}}
+      {{!-- Brand --}}
+      <div class="{{#match @custom.header_logo_position "left"}}flex-1{{/match}} flex items-center justify-start" data-header-brand>
+        <a class="" href="{{@site.url}}" data-brand>
+          {{> logo loading="eager"}}
+        </a>
+      </div>
+
+      <div class="flex items-center justify-end gap-3 md:gap-4 text-sm md:text-base font-medium{{#match @custom.header_logo_position "center"}} flex-1{{/match}}" data-header-actions>
+        {{!-- Member/User button --}}
+        {{#if @member}}
+          <button class="relative flex items-center justify-center size-8 md:size-9 hover:text-brand cursor-pointer rounded-full" data-portal="account" aria-label="{{@member.name}}">
+            <img class="relative size-7 md:size-8 rounded-full z-2" 
+              src="{{@member.avatar_image}}"
+              alt="{{@member.name}}">
+            {{>icon name="user" icon_class="absolute z-1 size-5 stroke-2 inset-1.5 md:inset-2"}}
+          </button>
+        {{else}}
+          <a href="/signin/" {{#if @custom.use_portal_links}}data-portal="signin"{{/if}}
+            class="hover:text-brand">
+            <span>{{t "Sign in"}}</span>
+          </a>
+          <a href="/signup/" {{#if @custom.use_portal_links}}data-portal="subscribe"{{/if}}
+            class="px-3 py-1.5 bg-brand text-brand-contrast rounded-btn hover:brightness-110 sm:px-4 md:px-6 md:py-2">
+            <span>{{t "Subscribe"}}</span>
+          </a>
+        {{/if}}
+      </div>
+    </div>
+
+    <div class="flex gap-4 border-t-4 border-brd border-b py-2 md:py-2.5 text-sm md:text-[0.95rem]" data-header-bottom>
+      {{!-- Menu button --}}
+      <button class="flex flex-col items-center gap-0.75 justify-center rounded-theme cursor-pointer p-1 transition-all hover:[&_span]:bg-brand" 
+        data-menu-toggle aria-label="{{t "Menu toggle"}}" aria-expanded="false" aria-haspopup="true" aria-controls="menu"
+        @click="menuOpen = !menuOpen" :aria-expanded="menuOpen.toString()"
+      >
+        <span class="relative pointer-events-none h-0.5 rounded-sm bg-typ w-4.5 transition-all"></span>
+        <span class="relative pointer-events-none h-0.5 rounded-sm bg-typ w-4.5 transition-all"></span>
+        <span class="relative pointer-events-none h-0.5 rounded-sm bg-typ w-4.5 transition-all"></span>
+        <span class="sr-only">{{t "Menu"}}</span> 
+      </button>
+
+      {{!-- Navigation --}}
+      <nav class="flex-1 relative justify-start" data-nav="header">
+        {{navigation 
+          ul_class="flex gap-3 hidden lg:flex"
+          li_class="flex items-center relative rounded-theme"
+          a_class="w-full flex rounded-theme py-1 hover:text-brand"
+        }}
+      </nav>
+
+      {{#match @custom.header_logo_position "left"}}
+        {{!-- Socials --}}
+        {{> social-links 
+          nav_class="hidden sm:flex gap-2.5 items-center self-center"
+          item_class="hover:text-brand"
+          icon_class="stroke-2 size-4 lg:size-4.5"
+          text_class="sr-only"
+        }}
+
+        <hr class="hidden sm:flex w-[1px] h-5 bg-brd self-center opacity-20 -mr-1"/>
+      {{/match}}
+
+
+      {{!-- Search button --}}
+      <button class="flex items-center gap-1.5 justify-center rounded-theme hover:text-brand cursor-pointer p-1" data-ghost-search title="{{t "Search"}}" aria-label="{{t "Search"}}">
+        {{> icon name="search" icon_class="size-4 lg:size-4.5 stroke-[2.5] fill-bgr [&>svg]:fill-inherit"}}
+        <span class="">{{t "Search"}}</span>
+      </button>
+    </div>
+  </div>
+
+</header>

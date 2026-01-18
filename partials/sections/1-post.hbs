@@ -1,0 +1,7 @@
+<div class="max-w-site mx-auto">
+  {{#foreach posts to="1"}}
+    {{> cards/post-card-fullwidth 
+      image_loading="eager"
+    }}
+  {{/foreach}}
+</div>

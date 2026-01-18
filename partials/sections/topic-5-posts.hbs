@@ -1,0 +1,53 @@
+{{#get "posts" filter="tag:{{slug}}+tag:-[hash-podcast,hash-event,hash-newsletter,hash-sponsored]" include="tags,authors,tiers" limit="5"}}
+  {{#if posts}}
+    <section class="px-5 sm:px-6 mt-20" data-topic="{{../slug}}" data-topic-number="{{@number}}" data-layout-alt>
+      <div class="max-w-site mx-auto">
+        {{!-- {{t "See all"}} --}}
+        {{> section-heading 
+          section_title=../name 
+          section_link=../url 
+          section_link_text=(t 'See all')
+        }}
+        <div class="grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+          <div class="sm:col-span-2 pb-5 border-b border-brd-soft lg:pb-0 lg:border-b-0 lg:pr-5 lg:border-r" data-topic-main>
+            {{#foreach posts from="1" to="1"}}
+              {{> cards/post-card-vertical
+                card_class="[&_[data-post-card-type]]:lg:scale-175"
+                title_class="lg:text-3xl"
+                excerpt_class="md:text-lg"
+              }}
+            {{/foreach}}
+          </div>
+          <div class="flex flex-col gap-5 pb-5 border-b border-brd-soft sm:pb-0 sm:border-b-0 sm:pr-5 sm:border-r" data-topic-secondary="1">
+            {{#foreach posts from="2" to="2"}}
+              {{> cards/post-card-vertical
+                card_class=""
+                excerpt_class="hidden"
+              }}
+            {{/foreach}}
+            {{#foreach posts from="3" to="3"}}
+              {{> cards/post-card-vertical
+                card_class="border-t border-brd-soft pt-5"
+                excerpt_class="hidden"
+              }}
+            {{/foreach}}
+          </div>
+          <div class="flex flex-col gap-5" data-topic-secondary="2">
+            {{#foreach posts from="4" to="4"}}
+              {{> cards/post-card-vertical
+                card_class=""
+                excerpt_class="hidden"
+              }}
+            {{/foreach}}
+            {{#foreach posts from="5" to="5"}}
+              {{> cards/post-card-vertical
+                card_class="border-t border-brd-soft pt-5"
+                excerpt_class="hidden"
+              }}
+            {{/foreach}}
+          </div>
+        </div>
+      </div>
+    </section>
+  {{/if}}
+{{/get}}

@@ -1,0 +1,7 @@
+<div class="flex flex-col gap-8 md:gap-10 flex-3 divide-y-1 divide-brd-soft" data-post-feed="{{feed_type}}">
+  {{#foreach posts}}
+    {{> cards/post-card-horizontal 
+      card_class="pb-8 md:pb-10"
+    }}
+  {{/foreach}}
+</div>

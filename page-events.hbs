@@ -1,0 +1,21 @@
+{{!< default}}
+
+{{!-- Hero --}}
+{{#page}}
+  {{> page-hero}}
+{{/page}}
+
+<section class="px-5 sm:px-6" data-events>
+  <div class="max-w-site mx-auto border-t-3 border-brd-soft pt-8">
+    <div class="grid gap-8 sm:grid-cols-2 md:grid-cols-3 mb-8">
+      {{#foreach posts}}
+        {{> cards/event-card 
+          card_class="gap-0! h-full"
+          content_class="p-6 bg-bgr-tone h-full"
+        }}
+      {{/foreach}}
+    </div>
+
+    {{> pagination }}
+  </div>
+</section>

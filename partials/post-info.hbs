@@ -1,0 +1,38 @@
+<div class="px-5 sm:px-6 mb-8 font-sans" data-post-info>
+  <div class="max-w-content mx-auto border-b border-brd-soft pb-4 flex flex-wrap justify-between items-center gap-4 text-sm leading-none {{#match media_class "hidden"}} py-3! border-t{{/match}}{{#unless feature_image}} py-3! border-t{{/unless}}">
+    <div class="flex flex-col gap-1">
+      <div class="flex items-center gap-1 {{#match (date updated_at format="YYYY-DD-MM hh:mm") "!=" (date published_at format="YYYY-DD-MM hh:mm")}}sm:opacity-60{{/match}}">
+        <span class="">{{t "Published"}}:</span>
+        <time datetime="{{date format="YYYY-MM-DDThh:mm:ss"}}">{{date format="MMMM DD, YYYY, h:mm a"}}</time>
+      </div>
+      {{#match (date updated_at format="YYYY-DD-MM hh:mm") "!=" (date published_at format="YYYY-DD-MM hh:mm")}}
+        <div class="hidden sm:flex items-center gap-1">
+          {{> icon name="corner-down-right" icon_class="size-4 stroke-2"}}
+          <span class="">{{t "Last updated"}}:</span>
+          <time datetime="{{date updated_at format="YYYY-MM-DDThh:mm:ss"}}">{{date updated_at format="MMMM DD, YYYY, h:mm a"}}</time>
+        </div>
+      {{/match}}
+    </div>
+    <div class="flex items-center gap-1 relative flex-1 justify-end" x-data="{shareOpen: false}">
+      {{#if comments}}
+        <a class="flex gap-1 items-center hover:text-brand lowercase px-2 py-1" href="#comments">
+          {{>icon name="comments" icon_class="size-4 stroke-2" }}
+          {{comment_count
+            empty="0"
+            singular=(t 'comment')
+            plural=(t 'comments')
+            class=""
+            autowrap="span"
+          }}
+        </a>
+        <span class="inline mx-0.5 text-brd-soft">|</span>
+      {{/if}}
+      <button class="flex items-center gap-1 cursor-pointer hover:text-brand px-2 py-1 rounded-sm" @click="shareOpen = !shareOpen" data-share-toggle>
+        {{> icon name="share" icon_class="size-4 stroke-2"}}
+        <span class="">{{t "Share"}}</span>
+      </button>
+      {{> social-share
+      }}
+    </div>
+  </div>
+</div>

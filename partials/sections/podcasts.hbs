@@ -1,0 +1,23 @@
+{{#if @custom.show_podcasts}}
+  {{#get "posts" filter="tag:[podcast,hash-podcast]" include="tags,authors,tiers" limit="4" order="featured desc, published_at desc" as |podcasts|}}
+    {{#if podcasts}}
+      <section class="px-5 sm:px-6 mt-20" data-podcasts>
+        <div class="max-w-site mx-auto">
+          {{!-- {{t "Podcasts"}} {{t "See all"}} --}}
+          {{> section-heading 
+            section_title=(t 'Podcasts')
+            section_link="/podcasts/"
+            section_link_text=(t 'See all')
+          }}
+          <div class="grid gap-6 md:grid-cols-2 lg:grid-cols-4">
+            {{#foreach podcasts}}
+              {{> cards/podcast-card
+                excerpt_class="line-clamp-3 hidden"
+              }}
+            {{/foreach}}
+          </div>
+        </div>
+      </section>
+    {{/if}}
+  {{/get}}
+{{/if}}

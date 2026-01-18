@@ -1,0 +1,56 @@
+<footer class="px-5 sm:px-6 mt-16 font-sans" data-footer>
+  <div class="max-w-site mx-auto border-t-4 border-brd flex flex-col">
+    {{!-- Logo --}}
+    <div class="flex flex-wrap gap-4 items-end justify-between border-b border-brd-soft pt-6 pb-4">
+      <a href="{{@site.url}}" data-brand class="">
+        {{> logo loading="lazy"}}
+      </a>
+
+
+
+      {{!-- Socials --}}
+      {{> social-links
+        nav_class="flex flex-wrap gap-2.5 items-center"
+        item_class="flex p-2 bg-bgr-tone border border-brd-soft hover:border-typ hover:bg-typ hover:text-bgr rounded-full"
+        icon_class="stroke-2 size-4 md:size-4.5"
+        text_class="sr-only"
+      }}
+
+      {{!-- {{#if @custom.footer_description}}
+        <div class="prose md:prose-lg max-w-120 font-body">{{{@custom.footer_description}}}</div>
+      {{/if}} --}}
+    </div>
+
+    <div class="flex flex-col gap-4 md:flex-row py-5" x-init="$nextTick(() => { Array.from($el.querySelectorAll('.is-subitem')).forEach(item => { const itemName = item.querySelector('a span'); itemName.textContent = itemName.textContent.trim().slice(1); }); })">
+      <div class="flex flex-col gap-4 flex-3 text-base">
+        {{!-- Navigation --}}
+        <nav class="relative justify-start font-medium hidden" data-nav="primary">
+          {{navigation 
+            ul_class="flex flex-wrap gap-1"
+            li_class="flex items-center relative rounded-theme [&:not(:last-of-type)]:after:content-['/'] after:text-brd-soft after:mx-2 after:font-normal [&:has(a[href='#'])]:hidden"
+            a_class="w-full flex rounded-theme hover:text-brand"
+          }}
+        </nav>
+
+        <nav class="relative justify-start" data-nav="secondary">
+          {{navigation 
+            type="secondary"
+            ul_class="flex flex-wrap gap-1"
+            li_class="flex items-center relative rounded-theme [&:not(:last-of-type)]:after:content-['/'] after:text-brd-soft after:mx-2 after:font-normal [&:has(a[href='#'])]:hidden"
+            a_class="w-full flex rounded-theme hover:text-brand"
+          }}
+        </nav>
+      </div>
+    </div>
+
+    
+    {{!-- Copy & Color scheme --}}
+    <div class="lex flex-wrap items-center gap-2 relative py-4 border-t border-brd-soft">
+      <div class="text-sm">
+        <span data-footer-date>&copy;{{date format="YYYY"}}&nbsp;{{#link href=@site.url class="hover:text-brand"}}{{@site.title}}{{/link}}.</span>
+        <span data-footer-ghost>{{t "Published with"}}&nbsp;{{#link href="https://ghost.org" class="hover:text-brand"}}Ghost{{/link}}</span>
+        <span data-footer-theme>&&nbsp;{{#link href="https://brightthemes.com/themes/gazet" class="hover:text-brand"}}Gazet{{/link}}.</span>
+      </div>
+    </div>
+  </div>
+</footer>
